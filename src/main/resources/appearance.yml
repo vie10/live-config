@@ -1,0 +1,22 @@
+# The prefix of this plugin that appears in messages.
+pluginPrefix: <#B8B3E9>[<#F5F5F5>LiveConfig<#B8B3E9>]
+# The primary color used in the plugin for the most part of common text.
+# It's recommended to use not bright one.
+#
+# Supports only HEX format of colors.
+primaryHex: '#B8B3E9'
+# The accent color used in the plugin for text to which player should give an attention.
+# It's recommended to use a different to the primary color.
+#
+# Supports only HEX format of colors.
+accentHex: '#F5F5F5'
+# The warn color used in the plugin for text that warns player that something is wrong.
+# It's recommended to use a different color than the others.
+#
+# Supports only HEX format of colors.
+warnHex: '#f6cd61'
+# The error color used in the plugin for text that message about an error.
+# It's recommended to use a different color than the others.
+#
+# Supports only HEX format of colors.
+errorHex: '#fe8a71'

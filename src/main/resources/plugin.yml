@@ -1,0 +1,8 @@
+name: LiveConfig
+version: "${version}"
+description: In Live mode reloads plugin as you edit its config
+author: vie10
+main: online.viestudio.LiveConfigPlugin
+load: STARTUP
+api-version: 1.18
+depend: [ "PaperKit" ]
