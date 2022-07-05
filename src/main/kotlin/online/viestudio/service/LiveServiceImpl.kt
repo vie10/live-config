@@ -5,8 +5,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toSet
-import online.viestudio.config.AdvancedConfig
-import online.viestudio.paperkit.koin.config
+import online.viestudio.config.AdvancedConfig.Companion.advanced
 import online.viestudio.paperkit.koin.plugin
 import online.viestudio.paperkit.plugin.KitPlugin
 import online.viestudio.paperkit.util.safeRunWithMeasuring
@@ -20,13 +19,12 @@ import java.util.concurrent.ConcurrentHashMap
 class LiveServiceImpl : LiveService {
 
     override var isEnabled: Boolean = false
-    private val advancedConfig by config<AdvancedConfig>()
+    private val log get() = plugin.log
     private val plugin by plugin<KitPlugin>()
     private var job: Job? = null
     private val modificationsMap: MutableMap<String, String> = ConcurrentHashMap()
-    private val log get() = plugin.log
     private val plugins get() = plugin.server.pluginManager.plugins
-    private val configFilter get() = FileFilter { it.extension in advancedConfig.extensions }
+    private val configFilter = FileFilter { it.extension in advanced.extensions }
 
     override suspend fun enable() {
         if (isEnabled) disable()
@@ -34,7 +32,7 @@ class LiveServiceImpl : LiveService {
         job = plugin.scope.launch {
             while (isActive) {
                 reloadChanged()
-                delay(advancedConfig.delay)
+                delay(advanced.delay)
             }
         }
     }
@@ -86,8 +84,7 @@ class LiveServiceImpl : LiveService {
         return true
     }
 
-    private fun File.calculateMd5(): String {
-        val md5 = MessageDigest.getInstance("MD5")
-        return BigInteger(1, md5.digest(readBytes())).toString(16).padStart(32, '0')
+    private fun File.calculateMd5(): String = with(MessageDigest.getInstance("MD5")) {
+        return BigInteger(1, digest(readBytes())).toString(16).padStart(32, '0')
     }
 }

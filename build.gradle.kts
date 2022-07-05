@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "online.viestudio"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.paper-kit", "paper-kit", "1.0.0")
+    compileOnly("com.github.paper-kit", "paper-kit", "2.1.0")
     @Suppress("DependencyOnStdlib")
     compileOnly(kotlin("stdlib")) // It's provided in PaperKit jar.
 }

@@ -1,7 +1,10 @@
 package online.viestudio.config
 
 import kotlinx.serialization.Serializable
+import online.viestudio.paperkit.command.CommandConfig
 import online.viestudio.paperkit.config.Comment
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 @Serializable
 data class CommandsConfig(
@@ -26,11 +29,8 @@ data class CommandsConfig(
     ),
 ) {
 
-    @Serializable
-    data class CommandConfig(
-        val name: String,
-        val aliases: List<String>? = null,
-        val description: String,
-        val permission: String,
-    )
+    companion object {
+
+        val KoinComponent.commands get() = get<CommandsConfig>()
+    }
 }
